@@ -8,7 +8,7 @@ set ( SOURCES
 	game.cpp 
 	networkai.cpp 
 	reinforceai.cpp 
-	simpleai.cpp
+	simpleai.cpp 
 )
 
 set ( HEADERS
