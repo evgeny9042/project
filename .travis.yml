@@ -5,6 +5,8 @@ compiler:
   
 before_script:
   - sudo apt-get install libboost-test-dev -y
+  - sudo apt-get install build-essential
+  - sudo apt-get install qt5-default
 
 script:
   - mkdir build
