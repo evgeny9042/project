@@ -8,9 +8,9 @@
 #include <QString> 
 #include <QStringList> 
 
-#include "C:/otus/dlib-19.18/dlib/dnn.h"
-#include "C:/otus/dlib-19.18/dlib/data_io.h"
-#include "C:/otus/dlib-19.18/dlib/cuda/tensor.h"
+#include "dlib/dnn.h"
+#include "dlib/data_io.h"
+#include "dlib/cuda/tensor.h"
 
 using namespace dlib;
 
