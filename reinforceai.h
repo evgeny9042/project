@@ -8,16 +8,16 @@
 #include "./game.h"
 
 
-/// Реализация классического reinforcement learning
-/// В качестве состояния выступает 
+/// Р РµР°Р»РёР·Р°С†РёСЏ РєР»Р°СЃСЃРёС‡РµСЃРєРѕРіРѕ reinforcement learning
+/// Р’ РєР°С‡РµСЃС‚РІРµ СЃРѕСЃС‚РѕСЏРЅРёСЏ РІС‹СЃС‚СѓРїР°РµС‚ 
 class ReinforceAi : public AI
 {
 public:
   ReinforceAi(Game * game);
   
-  /// Натренировать
+  /// РќР°С‚СЂРµРЅРёСЂРѕРІР°С‚СЊ
   void train() override;
-  /// Сделать шаг в игре
+  /// РЎРґРµР»Р°С‚СЊ С€Р°Рі РІ РёРіСЂРµ
   void play() override;
 
 private:

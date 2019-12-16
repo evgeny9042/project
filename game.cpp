@@ -16,14 +16,14 @@ void Game::reset()
   m_done  = false;
 
   m_platform_y = static_cast<int>(m_border_y.first + (m_border_y.second - m_border_y.first) / 2.0);
-  // генерируем координаты мяча возле правой стены на рандомной высоте
+  // РіРµРЅРµСЂРёСЂСѓРµРј РєРѕРѕСЂРґРёРЅР°С‚С‹ РјСЏС‡Р° РІРѕР·Р»Рµ РїСЂР°РІРѕР№ СЃС‚РµРЅС‹ РЅР° СЂР°РЅРґРѕРјРЅРѕР№ РІС‹СЃРѕС‚Рµ
   static std::random_device rd;
   static std::mt19937 re(rd());
   static std::uniform_int_distribution<coord_t> dis_y(m_border_y.first + m_ball_radius,
     m_border_y.second - m_ball_radius);
   m_ball_coords = std::make_pair(m_border_x.second - m_ball_radius, dis_y(re));
 
-  // генерурем скорость и курс
+  // РіРµРЅРµСЂСѓСЂРµРј СЃРєРѕСЂРѕСЃС‚СЊ Рё РєСѓСЂСЃ
   static std::uniform_int_distribution<int> dis_course(135, 225);
   m_course = dis_course(re);
   
@@ -33,17 +33,17 @@ void Game::reset()
 void Game::step(int action)
 {
   if ( m_done ) return;
-  // перемещаем площадку
+  // РїРµСЂРµРјРµС‰Р°РµРј РїР»РѕС‰Р°РґРєСѓ
   switch ( action ) {
-  case 0: // стоим на месте
+  case 0: // СЃС‚РѕРёРј РЅР° РјРµСЃС‚Рµ
     break;
-  case 1: // вверх  
+  case 1: // РІРІРµСЂС…  
     m_platform_y -= m_platform_step;
     if ( m_platform_y - m_platform_size < m_border_y.first ) {
       m_platform_y = m_border_y.first + m_platform_size;
     }    
     break;
-  case 2: // вниз    
+  case 2: // РІРЅРёР·    
     m_platform_y += m_platform_step;
     if ( m_platform_y + m_platform_size > m_border_y.second ) {
       m_platform_y = m_border_y.second - m_platform_size;
@@ -55,7 +55,7 @@ void Game::step(int action)
 
   double PI = 3.14159265;
 
-  // определяем новые теоретические координаты мяча
+  // РѕРїСЂРµРґРµР»СЏРµРј РЅРѕРІС‹Рµ С‚РµРѕСЂРµС‚РёС‡РµСЃРєРёРµ РєРѕРѕСЂРґРёРЅР°С‚С‹ РјСЏС‡Р°
   auto cos_ = cos(m_course * PI / 180);
   auto sin_ = sin(m_course * PI / 180);
   coord_t delta_x = static_cast<int>(cos_ * m_velocity);
@@ -63,7 +63,7 @@ void Game::step(int action)
   m_ball_coords.first += delta_x;
   m_ball_coords.second += delta_y;
 
-  // удар о верх или низ
+  // СѓРґР°СЂ Рѕ РІРµСЂС… РёР»Рё РЅРёР·
   int down_y = m_ball_coords.second + m_ball_radius;
   int up_y = m_ball_coords.second - m_ball_radius;
 
@@ -77,7 +77,7 @@ void Game::step(int action)
     m_course = 360 - m_course;
   }
 
-  // удар о право
+  // СѓРґР°СЂ Рѕ РїСЂР°РІРѕ
   int right_x = m_ball_coords.first + m_ball_radius;
   if ( right_x > m_border_x.second ) {
     m_ball_coords.first -= right_x - m_border_x.second;
@@ -90,15 +90,15 @@ void Game::step(int action)
   }
 
 
-  // удар о лево (о платформу)
+  // СѓРґР°СЂ Рѕ Р»РµРІРѕ (Рѕ РїР»Р°С‚С„РѕСЂРјСѓ)
   int left_x = m_ball_coords.first - m_ball_radius;
   if ( left_x < m_border_x.first ) {
     if ( abs(m_ball_coords.second - m_platform_y) <= m_platform_size ) {
-      // попали на платформу
+      // РїРѕРїР°Р»Рё РЅР° РїР»Р°С‚С„РѕСЂРјСѓ
       m_ball_coords.first += m_border_x.first - left_x;
 
-      if ( m_course <= 180 ) { // если летели вверх        
-        if ( action == 2 ) { // а платформа сдвинулась вниз
+      if ( m_course <= 180 ) { // РµСЃР»Рё Р»РµС‚РµР»Рё РІРІРµСЂС…        
+        if ( action == 2 ) { // Р° РїР»Р°С‚С„РѕСЂРјР° СЃРґРІРёРЅСѓР»Р°СЃСЊ РІРЅРёР·
           m_course = 180 + m_course;
           m_velocity = std::max(m_velocity - m_step_velocity, m_min_velocity);
         } else {
@@ -107,8 +107,8 @@ void Game::step(int action)
             m_velocity = std::min(m_velocity + m_step_velocity, m_max_velocity);
         }
       }
-      else {  // если летели вниз
-        if ( action == 1 ) { // а платформа сдвинулась вверх
+      else {  // РµСЃР»Рё Р»РµС‚РµР»Рё РІРЅРёР·
+        if ( action == 1 ) { // Р° РїР»Р°С‚С„РѕСЂРјР° СЃРґРІРёРЅСѓР»Р°СЃСЊ РІРІРµСЂС…
           m_course = m_course - 180;
           m_velocity = std::max(m_velocity - m_step_velocity, m_min_velocity);
         } else {          
@@ -121,11 +121,11 @@ void Game::step(int action)
 
 
     } else {
-      // пролетели мимо платформы
+      // РїСЂРѕР»РµС‚РµР»Рё РјРёРјРѕ РїР»Р°С‚С„РѕСЂРјС‹
       m_done = true;
     }
   }
-  // Пока играем, очки увеличиваются
+  // РџРѕРєР° РёРіСЂР°РµРј, РѕС‡РєРё СѓРІРµР»РёС‡РёРІР°СЋС‚СЃСЏ
   increase_score();
 }
 

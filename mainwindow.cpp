@@ -74,14 +74,14 @@ void MainWindow::on_timer()
     m_timer.stop();
     return;
   }
-  if ( m_current_ai == nullptr ) { // играет пользователь    
+  if ( m_current_ai == nullptr ) { // РёРіСЂР°РµС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ    
     if ( m_actions.empty() ) {
       m_game.step(0);
     } else {
       m_game.step(m_actions.front());
       m_actions.pop();
     }
-  } else { // играет ИИ
+  } else { // РёРіСЂР°РµС‚ РР
     m_current_ai->play();
   }  
   m_score_label->setText(QString::number(m_game.score()));
@@ -158,7 +158,7 @@ std::shared_ptr<AI> MainWindow::get_ai(std::string name)
 }
 
 //------------------------------------------------------------------------------
-/// Отрисовать текущее состояние игры
+/// РћС‚СЂРёСЃРѕРІР°С‚СЊ С‚РµРєСѓС‰РµРµ СЃРѕСЃС‚РѕСЏРЅРёРµ РёРіСЂС‹
 void MyPaintWidget::paintEvent(QPaintEvent *)
 {
   QPainter p(this);

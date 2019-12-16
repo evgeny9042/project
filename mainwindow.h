@@ -13,36 +13,36 @@
 #include "./aiinterface.h"
 #include "./game.h"
 
-/// Главный виджет для отрисовки игры
+/// Р“Р»Р°РІРЅС‹Р№ РІРёРґР¶РµС‚ РґР»СЏ РѕС‚СЂРёСЃРѕРІРєРё РёРіСЂС‹
 class MyPaintWidget : public QWidget
 {
 public:
-  /// Конструктор
+  /// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
   MyPaintWidget(QWidget *parent, Game* g) : QWidget(parent), game(g) {}
-  /// Отрисовать игру
+  /// РћС‚СЂРёСЃРѕРІР°С‚СЊ РёРіСЂСѓ
   void paintEvent(QPaintEvent *) override;
 
 private:
-  /// Игра
+  /// РРіСЂР°
   Game *game;
 };
 
-/// Главное окно
+/// Р“Р»Р°РІРЅРѕРµ РѕРєРЅРѕ
 class MainWindow: public QMainWindow
 {
     Q_OBJECT
 
 public:
-  /// Конструктор
+  /// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
   MainWindow();
-  /// Деструктор
+  /// Р”РµСЃС‚СЂСѓРєС‚РѕСЂ
   ~MainWindow();
 
 protected: 
-  /// Обработать закрытие главного окна
+  /// РћР±СЂР°Р±РѕС‚Р°С‚СЊ Р·Р°РєСЂС‹С‚РёРµ РіР»Р°РІРЅРѕРіРѕ РѕРєРЅР°
   void closeEvent(QCloseEvent *event) override;  
-  /// Обработать нажатик кнопок игроком 
-  /// можно управлять платформой, нажатием клавиш Вверх и Вниз
+  /// РћР±СЂР°Р±РѕС‚Р°С‚СЊ РЅР°Р¶Р°С‚РёРє РєРЅРѕРїРѕРє РёРіСЂРѕРєРѕРј 
+  /// РјРѕР¶РЅРѕ СѓРїСЂР°РІР»СЏС‚СЊ РїР»Р°С‚С„РѕСЂРјРѕР№, РЅР°Р¶Р°С‚РёРµРј РєР»Р°РІРёС€ Р’РІРµСЂС… Рё Р’РЅРёР·
   void keyPressEvent(QKeyEvent *key) override;
 
 private slots:
@@ -53,26 +53,26 @@ private slots:
   void on_state_changed(bool);
 
 private:
-  /// Главный виджет главного окна
+  /// Р“Р»Р°РІРЅС‹Р№ РІРёРґР¶РµС‚ РіР»Р°РІРЅРѕРіРѕ РѕРєРЅР°
   QWidget *m_central_widget{nullptr};
-  /// для отрисовки игры
+  /// РґР»СЏ РѕС‚СЂРёСЃРѕРІРєРё РёРіСЂС‹
   MyPaintWidget *m_paint_widget{nullptr};
-  /// для отображения набранных очков
+  /// РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РЅР°Р±СЂР°РЅРЅС‹С… РѕС‡РєРѕРІ
   QLabel *m_score_label; 
 
 private:
-  /// Игра
+  /// РРіСЂР°
   Game m_game; 
 
-  /// Текущий играющий ИИ
+  /// РўРµРєСѓС‰РёР№ РёРіСЂР°СЋС‰РёР№ РР
   std::shared_ptr<AI> m_current_ai{nullptr};
 
   std::map<std::string, std::shared_ptr<AI>> m_name2ai;
   std::shared_ptr<AI> get_ai(std::string name);
 
 private:
-  /// Если играем сами, то нужен таймер
+  /// Р•СЃР»Рё РёРіСЂР°РµРј СЃР°РјРё, С‚Рѕ РЅСѓР¶РµРЅ С‚Р°Р№РјРµСЂ
   QTimer m_timer;
-  /// Список действий пользователя, если он играет
+  /// РЎРїРёСЃРѕРє РґРµР№СЃС‚РІРёР№ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ, РµСЃР»Рё РѕРЅ РёРіСЂР°РµС‚
   std::queue<int> m_actions;
 };

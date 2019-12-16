@@ -3,18 +3,18 @@
 #include "./aiinterface.h"
 #include "./game.h"
 
-/// Deep reinforcement с использованием нейронных сетей
+/// Deep reinforcement СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј РЅРµР№СЂРѕРЅРЅС‹С… СЃРµС‚РµР№
 class NetworkAi : public AI
 {
 public:
-  /// Конструктор
+  /// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
   NetworkAi(Game * game);
-  /// Натренировать
+  /// РќР°С‚СЂРµРЅРёСЂРѕРІР°С‚СЊ
   void train() override;
-  /// Сделать шаг в игре
+  /// РЎРґРµР»Р°С‚СЊ С€Р°Рі РІ РёРіСЂРµ
   void play() override;
 
 private:
-  /// поиграть и записать процесс игр
+  /// РїРѕРёРіСЂР°С‚СЊ Рё Р·Р°РїРёСЃР°С‚СЊ РїСЂРѕС†РµСЃСЃ РёРіСЂ
   void play_and_record(int steps);
 };
