@@ -24,6 +24,13 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
+include(FetchContent)
+FetchContent_Declare(dlib
+	GIT_REPOSITORY https://github.com/davisking/dlib.git
+    GIT_TAG        v19.18
+)
+FetchContent_MakeAvailable(dlib)
+
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
 add_executable( pong ${SOURCES} ${HEADERS} )
@@ -34,6 +41,7 @@ set_target_properties(pong PROPERTIES
 )
 
 target_link_libraries(pong Qt5::Widgets)
+target_link_libraries(pong dlib::dlib)
 
 install(TARGETS pong RUNTIME DESTINATION bin)
 
