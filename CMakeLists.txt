@@ -24,12 +24,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-include(FetchContent)
-FetchContent_Declare(dlib
-	GIT_REPOSITORY https://github.com/davisking/dlib.git
-    GIT_TAG        v19.18
-)
-FetchContent_MakeAvailable(dlib)
+add_subdirectory(../dlib dlib_build)
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
