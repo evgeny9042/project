@@ -24,7 +24,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-add_subdirectory(../dlib dlib_build)
+add_subdirectory(dlib dlib_build)
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
